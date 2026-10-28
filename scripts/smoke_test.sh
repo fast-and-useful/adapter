@@ -10,8 +10,8 @@ OUT=${2:-runs/smoke-$MODEL}
 mkdir -p "$OUT"
 printf 'red panda\nhare\n' > "$OUT/classes.txt"
 
-fast-and-useful targets --model "$MODEL" --classes "$OUT/classes.txt" --per-class 4 --part-size 4 --out "$OUT/targets"
-fast-and-useful train --targets "$OUT/targets" --out "$OUT/adapter" --steps 20 --eval-every 10
-fast-and-useful generate --adapter "$OUT/adapter" --classes "$OUT/classes.txt" --per-class 2 --out "$OUT/adapted"
-fast-and-useful generate --model "$MODEL" --classes "$OUT/classes.txt" --per-class 2 --out "$OUT/released"
+fau-adapter targets --model "$MODEL" --classes "$OUT/classes.txt" --per-class 4 --part-size 4 --out "$OUT/targets"
+fau-adapter train --targets "$OUT/targets" --out "$OUT/adapter" --steps 20 --eval-every 10
+fau-adapter generate --adapter "$OUT/adapter" --classes "$OUT/classes.txt" --per-class 2 --out "$OUT/adapted"
+fau-adapter generate --model "$MODEL" --classes "$OUT/classes.txt" --per-class 2 --out "$OUT/released"
 echo "smoke test passed: images in $OUT/adapted and $OUT/released"

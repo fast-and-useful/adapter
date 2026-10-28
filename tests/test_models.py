@@ -2,7 +2,7 @@
 models' scheduler configurations from the Hugging Face Hub (a few kB each) and are skipped without it."""
 import pytest
 
-from fast_and_useful.models import MODELS, Flux2Klein, SDTurbo, ZImageTurbo, get_model
+from fau_adapter.models import MODELS, Flux2Klein, SDTurbo, ZImageTurbo, get_model
 
 
 def hub(model):

@@ -54,7 +54,7 @@ class PromptSet:
         `<id><TAB><name>` (the id names the class's image folder) or `<name>`. Blank lines and lines starting
         with # are skipped."""
         if spec in BUILTIN_CLASSES:
-            text = resources.files("fast_and_useful").joinpath("classes", f"{spec}.txt").read_text(encoding="utf-8")
+            text = resources.files("fau_adapter").joinpath("classes", f"{spec}.txt").read_text(encoding="utf-8")
         else:
             text = Path(spec).read_text(encoding="utf-8")
         labels, names = [], []

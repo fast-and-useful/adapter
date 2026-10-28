@@ -2,7 +2,7 @@ import torch
 import torch.nn.functional as F
 from torch import nn
 
-from fast_and_useful import lora
+from fau_adapter import lora
 
 
 def toy(dtype=torch.float32):

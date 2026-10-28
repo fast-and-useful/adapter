@@ -53,17 +53,17 @@ The models download from the Hugging Face Hub on first use (set `HF_HOME` to cho
 
 ```bash
 # 1. Training pairs: the unguided base from 16,000 noises (160 per ImageNet-100 class, eight prompt templates)
-fast-and-useful targets --model flux2-klein --classes imagenet100 --per-class 160 --out runs/flux2-klein/targets
+fau-adapter targets --model flux2-klein --classes imagenet100 --per-class 160 --out runs/flux2-klein/targets
 
 # 2. The adapter: rank-32 updates, 3,000 steps of 8 pairs
-fast-and-useful train --targets runs/flux2-klein/targets --out runs/flux2-klein/adapter
+fau-adapter train --targets runs/flux2-klein/targets --out runs/flux2-klein/adapter
 
 # 3. Images: the adapter for the first prediction, then the released student
-fast-and-useful generate --adapter runs/flux2-klein/adapter --prompt "a photo of a red panda." --per-prompt 4 --out samples
+fau-adapter generate --adapter runs/flux2-klein/adapter --prompt "a photo of a red panda." --per-prompt 4 --out samples
 ```
 
 Every default is the paper's setting; replace `flux2-klein` with `sd-turbo` or `z-image-turbo` for the other models.
-`fast-and-useful <command> --help` lists all options. The paper's runs of the first two commands took 4.6 and 1.1 hours
+`fau-adapter <command> --help` lists all options. The paper's runs of the first two commands took 4.6 and 1.1 hours
 on one H100 ([Cost](#cost)).
 
 ## Generate a dataset
@@ -72,7 +72,7 @@ With `--classes`, `generate` writes one folder per class, ready for `torchvision
 as in the paper, 500 images per class stored at 256 px:
 
 ```bash
-fast-and-useful generate --adapter runs/flux2-klein/adapter --classes imagenet100 --per-class 500 --resize 256 \
+fau-adapter generate --adapter runs/flux2-klein/adapter --classes imagenet100 --per-class 500 --resize 256 \
     --out data/imagenet100-klein
 ```
 
@@ -94,7 +94,7 @@ An adapter does not need to be fitted on the classes it generates: the paper's I
 class names can replace them. To fit on captions:
 
 ```bash
-fast-and-useful targets --model sd-turbo --prompts captions.txt --per-prompt 1 --out runs/sd-turbo-captions/targets
+fau-adapter targets --model sd-turbo --prompts captions.txt --per-prompt 1 --out runs/sd-turbo-captions/targets
 ```
 
 ## Several GPUs
@@ -105,7 +105,7 @@ GPU.
 
 ```bash
 for i in 0 1 2 3; do
-  CUDA_VISIBLE_DEVICES=$i fast-and-useful targets --model flux2-klein --classes imagenet100 --per-class 160 \
+  CUDA_VISIBLE_DEVICES=$i fau-adapter targets --model flux2-klein --classes imagenet100 --per-class 160 \
       --out runs/flux2-klein/targets --worker $i --num-workers 4 &
 done; wait
 ```
@@ -127,7 +127,7 @@ image with FLUX.2-klein's adapter (batches of 8) and 0.026 s with SD-Turbo's (ba
 ## Python
 
 ```python
-from fast_and_useful import AdaptedGenerator
+from fau_adapter import AdaptedGenerator
 
 generator = AdaptedGenerator("runs/flux2-klein/adapter")   # or AdaptedGenerator(model="flux2-klein"): the released student
 images = generator(["a photo of a red panda.", "a photo of a hare."], seeds=[0, 1])   # PIL images
@@ -182,7 +182,7 @@ generated the same way.
 
 ## Add another generator
 
-A generator pair is a subclass of `Model` in [fast_and_useful/models.py](fast_and_useful/models.py): the student's own
+A generator pair is a subclass of `Model` in [fau_adapter/models.py](fau_adapter/models.py): the student's own
 levels, the teacher's fine grid that passes through them, loading both pipelines, the starting noise, the teacher's
 target, prompt embeddings, the first prediction in the student's coordinates, and generation. The three existing
 classes are templates; register a new one in `MODELS`.
@@ -210,5 +210,6 @@ scripts/smoke_test.sh sd-turbo                  # every command at toy size on o
 
 ## License
 
-The code is under the [MIT License](LICENSE). The generators are not part of this repository: each downloads from the
-Hugging Face Hub under its own license, so check its model card before use.
+The code is under the [MIT License](LICENSE). The method figure is from the paper and is under
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), like the paper. The generators are not part of this
+repository: each downloads from the Hugging Face Hub under its own license, so check its model card before use.

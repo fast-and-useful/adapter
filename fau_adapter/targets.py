@@ -1,4 +1,4 @@
-"""`fast-and-useful targets`: the training pairs. For every prompt and noise, the unguided base runs its fine grid from
+"""`fau-adapter targets`: the training pairs. For every prompt and noise, the unguided base runs its fine grid from
 pure noise down to the jump endpoint (one of the student's own noise levels); the pair is the noise and the base's
 latent there. The base is needed only here.
 
@@ -132,7 +132,7 @@ class TargetSet:
         from safetensors import safe_open
         root = Path(root)
         if not (root / "config.json").exists():
-            raise SystemExit(f"{root}: no config.json; make the targets first (fast-and-useful targets)")
+            raise SystemExit(f"{root}: no config.json; make the targets first (fau-adapter targets)")
         self.root = root
         self.config = json.loads((root / "config.json").read_text())
         self.prompts = json.loads((root / "prompts.json").read_text(encoding="utf-8"))["prompts"]
@@ -140,7 +140,7 @@ class TargetSet:
         missing = [p.name for p in paths if not p.exists()]
         if missing:
             raise SystemExit(f"{root}: {len(missing)} of {len(paths)} parts are missing ({missing[0]}, ...); run the same "
-                             "`fast-and-useful targets` command again to finish them")
+                             "`fau-adapter targets` command again to finish them")
         n = self.config["pairs"]
         with safe_open(str(paths[0]), framework="pt") as f:
             first = {k: f.get_tensor(k) for k in ("noise", "target")}

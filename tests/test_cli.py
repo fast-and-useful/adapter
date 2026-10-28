@@ -4,9 +4,9 @@ import json
 import pytest
 import torch
 
-from fast_and_useful import __main__ as cli
-from fast_and_useful import prompts as P
-from fast_and_useful.targets import TargetSet, part_name, save_part, write_config
+from fau_adapter import __main__ as cli
+from fau_adapter import prompts as P
+from fau_adapter.targets import TargetSet, part_name, save_part, write_config
 
 
 @pytest.mark.parametrize("command", ["targets", "train", "generate"])
@@ -63,7 +63,7 @@ def test_a_resumed_run_must_ask_for_the_same_targets(tmp_path):
 
 
 def test_held_out_split():
-    from fast_and_useful.train import split
+    from fau_adapter.train import split
     held, train = split(16000)
     assert len(held) == 800 and len(train) == 15200   # the paper's 5%
     assert torch.equal(held, split(16000)[0])         # fixed by its seed

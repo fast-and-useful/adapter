@@ -7,7 +7,7 @@ README.md, and https://arxiv.org/abs/2610.32512 for the method and its evaluatio
 __version__ = "0.1.0"
 
 
-def __getattr__(name):   # `from fast_and_useful import AdaptedGenerator` without importing diffusers up front
+def __getattr__(name):   # `from fau_adapter import AdaptedGenerator` without importing diffusers up front
     if name == "AdaptedGenerator":
         from .generate import AdaptedGenerator
         return AdaptedGenerator

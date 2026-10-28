@@ -1,4 +1,4 @@
-"""`fast-and-useful generate`: images from the adapted student. The adapter is on for the first prediction only: one
+"""`fau-adapter generate`: images from the adapted student. The adapter is on for the first prediction only: one
 jump from pure noise to the jump endpoint; then it is switched off and the released student finishes on its own
 remaining levels. The base model is not loaded. Without --adapter, the released student runs its own schedule (the
 comparison).
@@ -78,7 +78,7 @@ def add_parser(sub) -> None:
                         description="Generate images with the adapted student: the adapter on the first prediction "
                                     "only, then the released student. Without --adapter, the released student alone.")
     which = ap.add_mutually_exclusive_group(required=True)
-    which.add_argument("--adapter", help="adapter.safetensors, or the directory `fast-and-useful train` wrote")
+    which.add_argument("--adapter", help="adapter.safetensors, or the directory `fau-adapter train` wrote")
     which.add_argument("--model", choices=sorted(MODELS), help="no adapter: the released student on its own schedule")
     P.add_arguments(ap, per_group_default=1, per_group_help="images per class or per prompt (default 1; the paper's "
                     "datasets: 500 per class for ImageNet-100, 1,281 for ImageNet-1k)")

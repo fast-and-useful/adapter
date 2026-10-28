@@ -1,4 +1,4 @@
-"""`fast-and-useful train`: fit the adapter. Low-rank updates on the student's denoiser are trained so that its first
+"""`fau-adapter train`: fit the adapter. Low-rank updates on the student's denoiser are trained so that its first
 prediction, one Euler step from pure noise, lands on the teacher's latent at the jump endpoint:
 
     loss = mean || x1 + (s_a - s_1) v(x1, s_1, prompt) - x*(x1, prompt) ||^2
@@ -25,7 +25,7 @@ def add_parser(sub) -> None:
     ap = sub.add_parser("train", help="fit the adapter on the pairs made by `targets`",
                         description="Fit low-rank updates on the student's denoiser so that its first prediction "
                                     "jumps to the teacher's latent at the jump endpoint.")
-    ap.add_argument("--targets", required=True, help="the directory written by `fast-and-useful targets`")
+    ap.add_argument("--targets", required=True, help="the directory written by `fau-adapter targets`")
     ap.add_argument("--out", required=True, help="output directory: adapter.safetensors and training.json")
     ap.add_argument("--rank", type=int, default=32, help="rank of the update (default 32, the paper's)")
     ap.add_argument("--steps", type=int, default=3000, help="optimization steps (default 3000)")

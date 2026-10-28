@@ -1,6 +1,6 @@
 import pytest
 
-from fast_and_useful import prompts as P
+from fau_adapter import prompts as P
 
 
 def test_builtin_class_lists():

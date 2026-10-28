@@ -19,7 +19,7 @@ import torch
 import torch.nn.functional as F
 from torch import nn
 
-FORMAT = "fast-and-useful-adapter"
+FORMAT = "fau-adapter"
 MODES = ("lowrank", "merged", "off")
 
 
@@ -103,7 +103,7 @@ def load(path: str | Path) -> tuple[dict[str, tuple[torch.Tensor, torch.Tensor]]
     with safe_open(str(path), framework="pt") as f:
         metadata = f.metadata() or {}
         if metadata.get("format") != FORMAT:
-            raise ValueError(f"{path} is not an adapter written by fast-and-useful (metadata: {metadata})")
+            raise ValueError(f"{path} is not an adapter written by fau-adapter (metadata: {metadata})")
         prefix = metadata["denoiser"] + "."
         weights = {}
         for key in f.keys():

@@ -1,4 +1,4 @@
-"""The command line: fast-and-useful {targets,train,generate} (or python -m fast_and_useful)."""
+"""The command line: fau-adapter {targets,train,generate} (or python -m fau_adapter)."""
 import argparse
 
 from . import __version__, generate, targets, train
@@ -6,7 +6,7 @@ from . import __version__, generate, targets, train
 
 def main(argv=None) -> None:
     ap = argparse.ArgumentParser(
-        prog="fast-and-useful",
+        prog="fau-adapter",
         description="Adapt a released distilled text-to-image model so that its images train better classifiers. "
                     "Three steps: `targets` runs the unguided base model to make training pairs, `train` fits the "
                     "adapter, `generate` makes images with it. Each command has its own --help.")
