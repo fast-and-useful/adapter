@@ -62,7 +62,8 @@ fau-adapter train --targets runs/flux2-klein/targets --out runs/flux2-klein/adap
 fau-adapter generate --adapter runs/flux2-klein/adapter --prompt "a photo of a red panda." --per-prompt 4 --out samples
 ```
 
-Every default is the paper's setting; replace `flux2-klein` with `sd-turbo` or `z-image-turbo` for the other models.
+The defaults of `targets` and `train` are the paper's settings; replace `flux2-klein` with `sd-turbo` or
+`z-image-turbo` for the other models.
 `fau-adapter <command> --help` lists all options. The paper's runs of the first two commands took 4.6 and 1.1 hours
 on one H100 ([Cost](#cost)).
 
@@ -160,7 +161,8 @@ generated the same way.
 
 ## Options worth knowing
 
-- `targets --target-level L` moves the jump endpoint to another of the student's levels (1 to 3). The defaults are the
+- `targets --target-level L` moves the jump endpoint to another of the student's levels (FLUX.2-klein: 2 or 3;
+  SD-Turbo and Z-Image-Turbo: 1 to 3). The defaults are the
   paper's choices, selected by the accuracy of classifiers trained on the generated images and tested on real
   validation images; the fit's error does not choose it. Shorter jumps gave lower accuracy in the paper's ablations.
 - `targets --teacher-guidance W` sets the base's classifier-free guidance weight. The default, 1, is unguided; guided

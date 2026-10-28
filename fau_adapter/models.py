@@ -195,9 +195,10 @@ class Flux2Klein(Model):
     dtype = torch.bfloat16
     batch_size = 8
     train_batch_size = 8
-    # The base's 50-step levels with the student's levels 0.958, 0.884 and 0.7175 put in (the latter two in place of
-    # the base level they nearly coincide with): 1 -> 0.7175 in 35 steps, at 512 px
-    FINE = (("base", 0, 10), ("student", 1, 2), ("base", 10, 21), ("student", 2, 3), ("base", 22, 34), ("student", 3, 4))
+    # The base's 50-step levels with the student's levels 0.884 and 0.7175 in place of the base level each nearly
+    # coincides with: 1 -> 0.7175 in 34 steps at 512 px, the grid of the paper's adapter. The student's level 0.958 is
+    # not on it, so the jump can end at level 2 or 3.
+    FINE = (("base", 0, 21), ("student", 2, 3), ("base", 22, 34), ("student", 3, 4))
 
     def student_levels(self):
         return list(klein_levels(self.student_steps))

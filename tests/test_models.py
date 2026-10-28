@@ -22,19 +22,21 @@ def test_registry():
 def test_klein_levels_at_512_px():
     m = Flux2Klein()
     assert m.student_levels() == [1.0, 0.958085371628187, 0.8839818317017591, 0.7174965587003479]
-    assert m.default_target_level == 3 and m.target_levels() == [1, 2, 3]
+    assert m.default_target_level == 3 and m.target_levels() == [2, 3]
 
 
 def test_klein_teacher_grid():
+    """The grid of the paper's adapter (its pairs of 2026-10-07): 34 steps, no level at 0.958."""
     m = Flux2Klein()
     grid = m.teacher_grid(3)
-    assert len(grid) == 36 and grid[0] == 1.0   # 35 teacher steps
+    assert len(grid) == 35 and grid[0] == 1.0   # 34 teacher steps, the method figure's count
     levels = m.student_levels()
-    assert (grid[10], grid[22], grid[35]) == tuple(levels[1:])
-    assert [round(v, 5) for v in (grid[9], grid[11], grid[21], grid[23], grid[34])] == \
-        [0.96152, 0.95641, 0.89162, 0.87469, 0.73859]
+    assert (grid[21], grid[34]) == tuple(levels[2:])
+    assert [round(v, 5) for v in (grid[20], grid[22], grid[33])] == [0.89162, 0.87469, 0.73859]
     assert all(a > b for a, b in zip(grid, grid[1:]))
-    assert m.teacher_grid(1) == grid[:11]
+    assert m.teacher_grid(2) == grid[:22]
+    with pytest.raises(ValueError):
+        m.teacher_grid(1)
 
 
 def test_klein_schedules():
