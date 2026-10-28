@@ -190,8 +190,8 @@ classes are templates; register a new one in `MODELS`.
 ## Check your setup
 
 ```bash
-pip install -e ".[test]" && pytest tests        # CPU only, seconds
-scripts/smoke_test.sh sd-turbo                  # every command at toy size on one GPU, a few minutes plus downloads
+pip install -e ".[test]" && pytest tests        # CPU only
+scripts/smoke_test.sh sd-turbo                  # every command at toy size on one GPU (downloads the models)
 ```
 
 ## Citation
