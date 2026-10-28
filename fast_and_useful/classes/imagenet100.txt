@@ -1,0 +1,103 @@
+# ImageNet-100 (the 100-class subset of Tian et al., CMC), in the paper's label order.
+# <WordNet id><TAB><name in the prompts>: the class's first WordNet synonym, with names that are ambiguous or
+# shared by another class replaced (e.g. 'crane bird', 'construction crane'), as in the paper.
+n02869837	poke bonnet
+n01749939	green mamba
+n02488291	langur
+n02107142	Doberman
+n13037406	gyromitra mushroom
+n02091831	Saluki dog
+n04517823	vacuum cleaner
+n04589890	window screen
+n03062245	cocktail shaker
+n01773797	garden spider
+n01735189	garter snake
+n07831146	carbonara
+n07753275	pineapple
+n03085013	computer keyboard
+n04485082	tripod
+n02105505	komondor dog
+n01983481	American lobster
+n02788148	banister
+n03530642	honeycomb
+n04435653	tile roof
+n02086910	papillon dog
+n02859443	boathouse
+n13040303	stinkhorn mushroom
+n03594734	jeans
+n02085620	Chihuahua
+n02099849	Chesapeake Bay retriever
+n01558993	robin
+n04493381	tub
+n02109047	Great Dane
+n04111531	rotisserie
+n02877765	bottle cap
+n04429376	throne
+n02009229	little blue heron
+n01978455	rock crab
+n02106550	Rottweiler
+n01820546	lorikeet
+n01692333	Gila monster
+n07714571	cabbage
+n02974003	car wheel
+n02114855	coyote
+n03785016	moped
+n03764736	milk can
+n03775546	mixing bowl
+n02087046	toy terrier dog
+n07836838	chocolate sauce
+n04099969	rocking chair
+n04592741	airplane wing
+n03891251	park bench
+n02701002	ambulance
+n03379051	American football helmet
+n02259212	leafhopper
+n07715103	cauliflower
+n03947888	pirate ship
+n04026417	purse
+n02326432	hare
+n03637318	lampshade
+n01980166	fiddler crab
+n02113799	standard poodle
+n02086240	Shih-Tzu
+n03903868	pedestal
+n02483362	gibbon
+n04127249	safety pin
+n02089973	English foxhound
+n03017168	chime bell
+n02093428	American Staffordshire terrier
+n02804414	bassinet
+n02396427	wild boar
+n04418357	theater curtain
+n02172182	dung beetle
+n01729322	hognose snake
+n02113978	Mexican hairless dog
+n03787032	mortarboard
+n02089867	Walker hound dog
+n02119022	red fox
+n03777754	modem
+n04238763	slide rule
+n02231487	walking stick insect
+n03032252	movie theater
+n02138441	meerkat
+n02104029	kuvasz dog
+n03837869	obelisk
+n03494278	harmonica
+n04136333	sarong
+n03794056	mousetrap
+n03492542	hard disk drive
+n02018207	American coot
+n04067472	fishing reel
+n03930630	pickup truck
+n03584829	clothes iron
+n02123045	tabby cat
+n04229816	ski mask
+n02100583	vizsla dog
+n03642806	laptop
+n04336792	medical stretcher
+n03259280	Dutch oven
+n02116738	African wild dog
+n02108089	boxer dog
+n03424325	gas mask
+n01855672	goose
+n02090622	borzoi

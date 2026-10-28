@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fast-and-useful"
+version = "0.1.0"
+description = "Train the first-step adapter of 'Fast and Useful: Adapting Distilled Generators for Visual Learning' and generate training data with it"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+authors = [{ name = "Patryk Bartkowiak" }]
+dependencies = [
+    "torch>=2.5",
+    "diffusers>=0.40.0",
+    "transformers>=4.51",
+    "accelerate>=1.0",
+    "safetensors>=0.4.3",
+    "numpy>=1.26",
+    "pillow>=10",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[project.scripts]
+fast-and-useful = "fast_and_useful.__main__:main"
+
+[project.urls]
+"Project page" = "https://fast-and-useful.github.io"
+Paper = "https://arxiv.org/abs/2610.32512"
+
+[tool.setuptools.packages.find]
+include = ["fast_and_useful*"]
+
+[tool.setuptools.package-data]
+fast_and_useful = ["classes/*.txt"]
