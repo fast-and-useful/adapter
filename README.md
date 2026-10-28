@@ -119,11 +119,12 @@ done; wait
 | `sd-turbo` | 4 GB | 0.7 | 0.2 | 1.0 GB |
 | `z-image-turbo` | 51 GB | about 5 | 1.6 | 8.4 GB |
 
-The hours are the paper's preparation runs on one H100. Their teacher also ran past the jump endpoint to record states
-for the ablations, so the targets take less with this code. `train` keeps every pair in CPU memory (the disk figure)
-plus, for FLUX.2-klein, 6 GB of prompt embeddings. Z-Image-Turbo's fit peaked at 27 GB of GPU memory; with less,
-`--grad-accum 2` (or 4) splits each batch into passes with the same result. Generation on one H100 took 0.10 s per
-image with FLUX.2-klein's adapter (batches of 8) and 0.026 s with SD-Turbo's (batches of 32).
+The hours are the paper's preparation runs on one H100. For SD-Turbo and Z-Image-Turbo their teacher also ran past the
+jump endpoint to record states for the ablations, so this code takes less. `train` keeps every pair in CPU memory (the
+disk figure) plus, for FLUX.2-klein, 6 GB of prompt embeddings. At the default batch sizes it peaks at 13 GB of GPU
+memory for FLUX.2-klein, 27 GB for SD-Turbo (float32 weights) and 20 GB for Z-Image-Turbo; with less, `--grad-accum 2`
+(or 4) splits each batch into passes with the same result. Generation on one H100 took 0.10 s per image with
+FLUX.2-klein's adapter (batches of 8) and 0.026 s with SD-Turbo's (batches of 32).
 
 ## Python
 
@@ -158,6 +159,12 @@ generation precision, as `generate` runs it.
 **Generation.** The update is folded into the weights for the first prediction, which jumps from pure noise to
 σ<sub>a</sub>; then it is switched off and the released student takes its own remaining steps. The paper's images were
 generated the same way.
+
+**Checked against the paper.** For the same seeds and prompts (we checked the first two ImageNet-100 classes, 16 to 32
+images per model), `targets` reproduces the paper's training pairs (bit for
+bit for FLUX.2-klein and Z-Image-Turbo, within float16 rounding for SD-Turbo), and `generate` with the paper's trained
+adapters reproduces the paper's dataset images (byte-identical JPEGs for FLUX.2-klein and Z-Image-Turbo; for SD-Turbo,
+half byte-identical and the rest within rounding, as for its released student).
 
 ## Options worth knowing
 
