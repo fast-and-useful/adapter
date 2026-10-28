@@ -37,7 +37,7 @@ Images are 512 x 512 px, as in the paper.
 
 ## Install
 
-Python 3.10 or newer and a CUDA GPU.
+Python 3.10 or newer (tested with 3.12) and a CUDA GPU.
 
 ```bash
 git clone https://github.com/fast-and-useful/adapter
