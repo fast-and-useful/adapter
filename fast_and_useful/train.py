@@ -97,6 +97,8 @@ def run(args) -> None:
         raise SystemExit("--batch-size must be a multiple of --grad-accum")
     if args.steps < 1 or args.warmup < 1:
         raise SystemExit("--steps and --warmup must be at least 1")
+    if len(data) < 2:
+        raise SystemExit(f"{args.targets} holds {len(data)} pair; training needs at least 2 (one is held out)")
     torch.manual_seed(args.seed)
     held, train_ids = split(len(data))
     print(f"{model.name}: {len(data)} pairs ({len(train_ids)} for training, {len(held)} held out), target "

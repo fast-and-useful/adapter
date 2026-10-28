@@ -60,3 +60,13 @@ def test_a_resumed_run_must_ask_for_the_same_targets(tmp_path):
     with pytest.raises(SystemExit, match="other targets"):
         write_config(tmp_path, dict(config, target_level=2), prompts)
     assert json.loads((tmp_path / "config.json").read_text())["target_level"] == 3
+
+
+def test_held_out_split():
+    from fast_and_useful.train import split
+    held, train = split(16000)
+    assert len(held) == 800 and len(train) == 15200   # the paper's 5%
+    assert torch.equal(held, split(16000)[0])         # fixed by its seed
+    held, train = split(8)
+    assert len(held) == 4 and len(train) == 4
+    assert not set(held.tolist()) & set(train.tolist())
